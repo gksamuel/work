@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListApplicationsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <p:messages id="messages" autoUpdate="true" closable="true" />  
+                <h:outputText escape="false" value="#{bundle.ListApplicationsEmpty}" rendered="#{applicationsController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{applicationsController.items.rowCount > 0}">
+                    <p:dataTable value="#{applicationsController.items}" var="item"  rowStyleClass="#{item.viewed == true ? 'ui-viewed-job' : null}"> 
+                        <f:facet name="header">  
+                            <h:outputText value="#{bundle.ListApplicationsTitle}"></h:outputText>
+                        </f:facet>  
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListApplicationsTitle_jobid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.jobid.title}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListApplicationsTitle_datemodified}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datemodified}">
+                         <f:convertDateTime dateStyle="full" type="both" timeZone="Africa/Nairobi" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <p:menuButton value="#{bundle.Options}">
+                                <p:menuitem>   
+                                    <h:commandLink action="#{applicationsController.prepareView}" value="#{bundle.ListApplicationsViewLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{applicationsController.applicationRecord}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                                <p:separator/>
+                                <p:menuitem> 
+                                    <h:commandLink action="#{applicationsController.prepareEdit}" value="#{bundle.ListApplicationsEditLink}"/>
+                                </p:menuitem>
+                                <p:separator/>
+                                <p:menuitem>
+                                    <h:commandLink action="#{applicationsController.destroy}" value="#{bundle.ListApplicationsDestroyLink}"/>
+                                </p:menuitem>
+                            </p:menuButton>
+
+
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

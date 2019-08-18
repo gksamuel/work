@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCompanyTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" autoUpdate="true" closable="true" />  
+            <h:form>
+                <p:panelGrid columns="2">
+                    <f:facet name="header">  
+                        <h:outputText value="#{bundle.EditCompanyTitle}"></h:outputText>
+                    </f:facet> 
+                    <h:outputText value="#{bundle.ViewCompanyLabel_logo}"/>
+                    <h:graphicImage id="logo" url="#{bundle.externalUrl}img/#{companyController.companyRecord.logo}" title="#{bundle.ViewCompanyTitle_logo}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_statusid}"/>
+                    <h:outputText value="#{companyController.selected.statusid.description}" title="#{bundle.ViewCompanyTitle_statusid}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_name}"/>
+                    <h:outputText value="#{companyController.selected.name}" title="#{bundle.ViewCompanyTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_expiry}"/>
+                    <h:outputText value="#{companyController.selected.expiry}" title="#{bundle.ViewCompanyTitle_expiry}">
+                         <f:convertDateTime dateStyle="full" type="both" timeZone="Africa/Nairobi" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_email}"/>
+                    <h:outputText value="#{companyController.selected.email}" title="#{bundle.ViewCompanyTitle_email}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_mobile}"/>
+                    <h:outputText value="#{companyController.selected.mobile}" title="#{bundle.ViewCompanyTitle_mobile}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_phone}"/>
+                    <h:outputText value="#{companyController.selected.phone}" title="#{bundle.ViewCompanyTitle_phone}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_website}"/>
+                    <h:outputText value="#{companyController.selected.website}" title="#{bundle.ViewCompanyTitle_website}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_address}"/>
+                    <h:outputText value="#{companyController.selected.address}" title="#{bundle.ViewCompanyTitle_address}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_location}"/>
+                    <h:outputText value="#{companyController.selected.location}" title="#{bundle.ViewCompanyTitle_location}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_contactperson}"/>
+                    <h:outputText value="#{companyController.selected.contactperson}" title="#{bundle.ViewCompanyTitle_contactperson}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_contactmobile}"/>
+                    <h:outputText value="#{companyController.selected.contactmobile}" title="#{bundle.ViewCompanyTitle_contactmobile}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_contactemail}"/>
+                    <h:outputText value="#{companyController.selected.contactemail}" title="#{bundle.ViewCompanyTitle_contactemail}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_description}"/>
+                    <h:outputText value="#{companyController.selected.description}" escape="false" title="#{bundle.ViewCompanyTitle_description}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_applicationemail}"/>
+                    <h:outputText value="#{companyController.selected.applicationemail}" title="#{bundle.ViewCompanyTitle_applicationemail}"/>
+                    <h:outputText value="#{bundle.ViewCompanyLabel_datemodified}"/>
+                    <h:outputText value="#{companyController.selected.datemodified}" title="#{bundle.ViewCompanyTitle_datemodified}">
+                         <f:convertDateTime dateStyle="full" type="both" timeZone="Africa/Nairobi" />
+                    </h:outputText>
+                </p:panelGrid>
+
+                <br />
+                <p:commandButton action="Edit" value="#{bundle.ViewCompanyEditLink}" ajax="false"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/publicTemplate.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateJobsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" autoUpdate="true" closable="true" />  
+            <h:outputText value="#{bundle.PrepareEarly}" style="font-weight: bold;"/>
+            <h:form   enctype="multipart/form-data">
+                <p:panelGrid id="createJob" columns="2" style="padding: 0px; margin: 0px; border: 0px;">
+                    <f:facet name="header">  
+                        <h:outputText value="#{bundle.CreateJobsTitle}"/>
+                    </f:facet> 
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_accountid}" for="accountid"  rendered="#{usersController.userRecord.accountid.mainaccount}"/>
+                        <h:outputText escape="false" value="&lt;br/&gt;"   rendered="#{usersController.userRecord.accountid.mainaccount}"/>
+                        <p:selectOneMenu id="accountid" value="#{jobsController.selected.accountid}"  required="true" requiredMessage="#{bundle.PleaseEnterAccount}"   rendered="#{usersController.userRecord.accountid.mainaccount}">
+                            <f:selectItems value="#{accountsController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
+                        <h:outputText escape="false" value="&lt;br/&gt;"   rendered="#{usersController.userRecord.accountid.mainaccount}"/>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_referenceno}" for="referenceno" /><br/>
+                        <p:inputText id="referenceno" value="#{jobsController.selected.referenceno}" title="#{bundle.CreateJobsTitle_referenceno}"  required="true" requiredMessage="#{bundle.PleaseEnterJobReference}"  /><br/>
+
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_title}" for="title" /><br/>
+                        <p:inputText id="title" value="#{jobsController.selected.title}" title="#{bundle.CreateJobsTitle_title}"   required="true" requiredMessage="#{bundle.PleaseEnterJobTitle}" />
+                    </p:fieldset>
+
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsTitle_category}" for="category"/><br/>
+                        <p:selectOneMenu id="category" value="#{jobsController.selected.categoryid}" required="true"  requiredMessage="#{bundle.PleaseEnterJobCategory}">
+                            <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
+                        <br/>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_summary}" for="summary" /><br/>
+                        <p:inputText id="summary" value="#{jobsController.selected.summary}" required="true"  requiredMessage="#{bundle.PleaseEnterJobSummary}"/> 
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_jobdescription}" for="jobdescription" />
+                        <p:editor id="jobdescription" value="#{jobsController.selected.jobdescription}" width="440" height="140"  required="true"  requiredMessage="#{bundle.PleaseEnterJobDesc}"/> 
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_qualifications}" for="qualifications" />
+                        <p:editor id="qualifications" value="#{jobsController.selected.qualifications}" width="440" height="140"  required="true"  requiredMessage="#{bundle.PleaseEnterJobQualifications}"/> 
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_experience}" for="experience" />
+                        <p:editor id="experience" value="#{jobsController.selected.experience}" width="440"   height="140" required="true"  requiredMessage="#{bundle.PleaseEnterJobExperience}"/> 
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_instructions}" for="instructions" />
+                        <p:editor id="instructions" value="#{jobsController.selected.instructions}" width="440"  height="140" required="true"  requiredMessage="#{bundle.PleaseEnterJobInstructions}"/> 
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_startdate}" for="startdate"/><br/>
+                        <p:calendar  id="startdate" value="#{jobsController.selected.startdate}" binding="#{startdate}" mindate="-1d" maxdate="+1y" showOtherMonths="true"  selectOtherMonths="true" pattern="dd/MM/yyyy" navigator="true" mode="popup"  required="true" requiredMessage="#{bundle.PleaseEnterJobStart}"/>
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_enddate}" for="enddate"/><br/>
+                        <p:calendar  id="enddate" value="#{jobsController.selected.enddate}" mindate="+1d" maxdate="+1y" showOtherMonths="true"  selectOtherMonths="true" pattern="dd/MM/yyyy" navigator="true" mode="popup"  required="true"  requiredMessage="#{bundle.PleaseEnterJobEnd}">
+                            <f:attribute name="startdate" value="#{startdate.value}" />
+                            <f:validator validatorId="validator.JobsDateValidator" />
+                        </p:calendar>
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_email}" for="email" /><br/>
+                        <p:inputText id="email" value="#{jobsController.selected.email}" title="#{bundle.CreateJobsTitle_email}" />
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_positions}" for="positionsid" /><br/>
+                        <p:selectOneMenu id="positionsid" value="#{jobsController.selected.positionsid}">
+                            <f:selectItems value="#{positionsController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_maxapplications}" for="maxapplications" /><br/>
+                        <p:inputText id="maxapplications" value="#{jobsController.selected.maxapplications}" title="#{bundle.CreateJobsTitle_maxapplications}" />
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_attachment}" for="attachment" /><br/>
+                        <t:inputFileUpload id="attachment" value="#{jobsController.applicationForm}" title="#{bundle.CreateJobsLabel_attachment}" /><hr/>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_questionnaire}" for="formid" /><br/>
+                        <p:selectOneMenu id="formid" value="#{jobsController.selected.formid}">
+                            <f:selectItems value="#{formsController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
+                        
+                    </p:fieldset>
+                    <p:fieldset>
+                        <p:outputLabel value="#{bundle.CreateJobsLabel_salary}" for="salary" /><br/>
+                        <p:selectOneMenu id="salary" value="#{jobsController.selected.salaryid}">
+                            <f:selectItems value="#{salaryController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
+                    </p:fieldset>
+                </p:panelGrid>
+                <br />
+                <p:commandButton action="#{jobsController.create}" value="#{bundle.CreateJobsSaveLink}" ajax="false" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

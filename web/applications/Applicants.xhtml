@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.Applicants} for #{applicationsController.job.title}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <p:messages id="messages" autoUpdate="true" closable="true" /> 
+                <h:outputText value="#{applicationsController.pagination.pageFirstItem + 1}...#{applicationsController.pagination.pageLastItem + 1}/#{applicationsController.pagination.itemsCount}" rendered="#{applicationsController.pagination.itemsCount > 0}"/>&nbsp;
+                <h:commandLink action="#{applicationsController.applicantPrevious}" value="#{bundle.Previous} #{applicationsController.pagination.pageSize}" rendered="#{applicationsController.pagination.hasPreviousPage}"/>&nbsp;
+                <h:commandLink action="#{applicationsController.applicantNext}" value="#{bundle.Next} #{applicationsController.pagination.pageSize}" rendered="#{applicationsController.pagination.hasNextPage}"/>&nbsp;
+                <p:commandButton ajax="false" action="#{applicationsController.unseen}" value="#{bundle.ListUsersViewUnseen}"/>
+                <p:commandButton ajax="false" action="#{applicationsController.prepareApplicants}" value="#{bundle.ListUsersViewAll}"/>
+                <p:commandButton ajax="false" action="#{applicationsController.seen}" value="#{bundle.ListUsersViewSeen}"/>
+                <p:dataTable  value="#{applicationsController.applicants}" var="applicants"   rowStyleClass="#{applicants.viewed == true ? 'ui-viewed-job' : null}">
+                    <f:facet name="header">  
+                        <h:outputText value="#{bundle.Applicants} for #{applicationsController.job.title}"></h:outputText>
+                    </f:facet> 
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListSeekersTitle_username}"/>
+                        </f:facet>
+                        <h:outputText value="#{applicants.seekerid.firstname} #{applicants.seekerid.middlename} #{applicants.seekerid.lastname}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListSeekersTitle_mobile}"/>
+                        </f:facet>
+                        <h:outputText value="#{applicants.seekerid.mobile}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListSeekersTitle_dateofbirth}"/>
+                        </f:facet>
+                        <h:outputText value="#{applicants.seekerid.dateofbirth}"/>
+                    </p:column>  
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListApplicationsTitle_datemodified}"/>
+                        </f:facet>
+                        <h:outputText value="#{applicants.datemodified}">
+                            <f:convertDateTime dateStyle="full" type="both"  timeZone="Africa/Nairobi" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListApplicationsTitle_viewed}"/>
+                        </f:facet>
+                        <h:outputText value="#{applicants.viewed} "/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{applicationsController.viewSeeker}" value="#{bundle.ListUsersViewLink}">
+                            <f:setPropertyActionListener value="#{applicants}" target="#{applicationsController.selected}" />
+                        </h:commandLink>
+
+                    </p:column>
+
+
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+
+
+    </ui:composition>
+
+</html>

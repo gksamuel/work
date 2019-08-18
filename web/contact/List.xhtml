@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListContactTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <p:messages id="messages" autoUpdate="true" closable="true" />  
+                <h:outputText escape="false" value="#{bundle.ListContactEmpty}" rendered="#{contactController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{contactController.items.rowCount > 0}">
+                    <h:outputText value="#{contactController.pagination.pageFirstItem + 1}..#{contactController.pagination.pageLastItem + 1}/#{contactController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{contactController.previous}" value="#{bundle.Previous} #{contactController.pagination.pageSize}" rendered="#{contactController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{contactController.next}" value="#{bundle.Next} #{contactController.pagination.pageSize}" rendered="#{contactController.pagination.hasNextPage}"/>&nbsp;
+                    <p:dataTable value="#{contactController.items}" var="item">
+                        <f:facet name="header">  
+                            <h:outputText value="#{bundle.ListContactTitle}"></h:outputText>
+                        </f:facet> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContactTitle_comment}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comment}" escape="false"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContactTitle_commentdate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.commentdate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{contactController.prepareView}" value="#{bundle.ListContactViewLink}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+                <br />
+                <p:commandButton action="#{contactController.prepareCreate}" value="#{bundle.ListContactCreateLink}" ajax="false"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>#{bundle.pageTitle} <ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <style type="text/css">
+            .leftcol{width:50%;}
+            .rightcol{text-align: right;}
+        </style>
+    </h:head>
+    <h:body>
+
+
+        <h:panelGroup  id="main" style="border: 1px solid #acbece; background-color: #f3f3f3;" layout="block">
+            <h:panelGroup    id="top"  style="border-bottom: 1px solid #acbece;" layout="block">&nbsp;</h:panelGroup>
+            <h:panelGrid columns="2" columnClasses="leftcol,rightcol">
+                <h:graphicImage value="#{resource['icons:logo.png']}"/>
+                <h:panelGroup>
+                    <ui:insert name="body">Default Body</ui:insert>
+                </h:panelGroup>
+            </h:panelGrid>
+
+            <h:panelGroup id="body" style="border-top:1px solid #acbece;" layout="block">
+                <div id="slider">
+                    <img src="#{bundle.staticUrl}img2/job-opportunity.jpg" data-htmlelem="#slidehtml1"   data-transition='{"slices": 5, "easing": "easeInOutSine", "delay": 200}'/>
+                    <img src="#{bundle.staticUrl}img2/pick2.jpg"  data-htmlelem="#slidehtml2"   data-caption-position="left" data-transition='{"slices": 5, "delay": 200, "easing": "easeInOutBack", "delayDir": "last-first"}' />
+                </div>
+                <h:outputText value="#{contentController.getContent(4)}" escape="false"/>
+            </h:panelGroup>
+            <div style="clear:both;"></div>
+            <h:panelGroup style="padding:10px;height:500px; " layout="block">
+                <h:panelGrid    id="welcome"  style="border-top: 1px solid #acbece;"  columns="2">
+                    <f:facet name="header"><h:outputText value="Latest Jobs"/></f:facet>
+                    <h:outputText value="#{contentController.getLatest()}" escape="false"/>
+                </h:panelGrid>
+            </h:panelGroup>
+            <div style="clear:both;"></div>
+            <h:panelGroup    id="foot"  style="border-top: 1px solid #acbece;"  layout="block">
+                <h:graphicImage value="#{resource['img2:silver.png']}"/>
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:outputScript name="js/jquery-1.8.3.min.js"/>
+       
+    </h:body>
+</html>

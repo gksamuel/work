@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="firstshortlist/Edit.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="seekers/Create.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="coverletters/Edit.xhtml" x="150" y="1200" zoom="true"/>
+        <Node id="thirdshortlist/Create.xhtml" x="650" y="900" zoom="true"/>
+        <Node id="education/List.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="education/Create.xhtml" x="2650" y="150" zoom="true"/>
+        <Node id="secondshortlist/List.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="files/Create.xhtml" x="650" y="1350" zoom="true"/>
+        <Node id="users/Edit.xhtml" x="2900" y="150" zoom="true"/>
+        <Node id="company/Create.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="work/Create.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="seekers/List.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="secondshortlist/Edit.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="work/Edit.xhtml" x="2150" y="300" zoom="true"/>
+        <Node id="index.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="pages/Edit.xhtml" x="2400" y="450" zoom="true"/>
+        <Node id="registration/Confirm.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="thirdshortlist/Edit.xhtml" x="2650" y="300" zoom="true"/>
+        <Node id="education/Edit.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="users/Create.xhtml" x="900" y="1050" zoom="true"/>
+        <Node id="firstshortlist/Create.xhtml" x="1900" y="600" zoom="true"/>
+        <Node id="seekers/View.xhtml" x="400" y="1050" zoom="true"/>
+        <Node id="registration/Edit.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="login.xhtml" x="900" y="750" zoom="true"/>
+        <Node id="registration/Create.xhtml" x="1400" y="450" zoom="true"/>
+        <Node id="pages/Create.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="jobs/Create.xhtml" x="1650" y="450" zoom="true"/>
+        <Node id="applications/View.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="company/Edit.xhtml" x="2150" y="150" zoom="true"/>
+        <Node id="files/List.xhtml" x="2400" y="300" zoom="true"/>
+        <Node id="jobs/View.xhtml" x="150" y="1650" zoom="true"/>
+        <Node id="applications/Edit.xhtml" x="1150" y="1050" zoom="true"/>
+        <Node id="coverletters/Create.xhtml" x="1650" y="300" zoom="true"/>
+        <Node id="pages/List.xhtml" x="650" y="450" zoom="false"/>
+        <Node id="jobs/Edit.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="secondshortlist/Create.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="seekers/Edit.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="work/List.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="company/View.xhtml" x="1400" y="600" zoom="true"/>
+        <Node id="jobs/List.xhtml" x="650" y="1200" zoom="true"/>
+        <Node id="users/List.xhtml" x="650" y="1050" zoom="true"/>
+        <Node id="template.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="work/View.xhtml" x="400" y="1350" zoom="true"/>
+        <Node id="company/List.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="files/View.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="files/Edit.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="users/View.xhtml" x="400" y="1200" zoom="true"/>
+        <Node id="applications/Create.xhtml" x="900" y="1200" zoom="true"/>
+        <Node id="coverletters/List.xhtml" x="2150" y="450" zoom="true"/>
+        <Node id="secondshortlist/View.xhtml" x="1400" y="900" zoom="true"/>
+        <Node id="registration/View.xhtml" x="1400" y="750" zoom="true"/>
+        <Node id="thirdshortlist/View.xhtml" x="2400" y="150" zoom="true"/>
+        <Node id="firstshortlist/List.xhtml" x="400" y="1500" zoom="true"/>
+        <Node id="coverletters/View.xhtml" x="1900" y="450" zoom="true"/>
+        <Node id="pages/View.xhtml" x="1650" y="750" zoom="true"/>
+        <Node id="education/View.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="registration/List.xhtml" x="1150" y="900" zoom="true"/>
+        <Node id="firstshortlist/View.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="thirdshortlist/List.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="applications/List.xhtml" x="150" y="1350" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

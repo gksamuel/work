@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListRegistrationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListRegistrationEmpty}" rendered="#{registrationController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{registrationController.items.rowCount > 0}">
+                    <h:outputText value="#{registrationController.pagination.pageFirstItem + 1}..#{registrationController.pagination.pageLastItem + 1}/#{registrationController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{registrationController.previous}" value="#{bundle.Previous} #{registrationController.pagination.pageSize}" rendered="#{registrationController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{registrationController.next}" value="#{bundle.Next} #{registrationController.pagination.pageSize}" rendered="#{registrationController.pagination.hasNextPage}"/>&nbsp;
+                    <p:dataTable value="#{registrationController.items}" var="item" style="border:solid 1px">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRegistrationTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRegistrationTitle_email}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.email}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRegistrationTitle_username}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.username}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRegistrationTitle_password}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.password}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRegistrationTitle_code}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.code}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRegistrationTitle_createdate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.createdate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{registrationController.prepareView}" value="#{bundle.ListRegistrationViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{registrationController.prepareEdit}" value="#{bundle.ListRegistrationEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{registrationController.destroy}" value="#{bundle.ListRegistrationDestroyLink}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{registrationController.prepareCreate}" value="#{bundle.ListRegistrationCreateLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

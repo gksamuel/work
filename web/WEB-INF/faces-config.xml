@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        
+        <lifecycle>
+            <phase-listener>work.utils.listeners.LoginListener</phase-listener>
+        </lifecycle>
+        
+        <navigation-rule>
+            <from-view-id>/*</from-view-id>
+            <navigation-case>
+                <from-outcome>Expired</from-outcome>
+                <to-view-id>/public/Membership.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>Inactive</from-outcome>
+                <to-view-id>/public/Inactive.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        
+        <navigation-rule>
+            <from-view-id>/registration/Confirm.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{registrationController.confirm}</from-action>
+                <from-outcome>success</from-outcome>
+                <to-view-id>/public/loginError.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule> 
+        
+        
+        <navigation-rule>
+            <from-view-id>/jobs/search.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{jobsController.search}</from-action>
+                <from-outcome>Search</from-outcome>
+                <to-view-id>/jobs/search.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule> 
+        <navigation-rule>
+            <from-view-id>/*</from-view-id>
+            <navigation-case>
+                <from-action>#{seekersController.logout}</from-action>
+                <to-view-id>/login.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule> 
+        <navigation-rule>
+            <from-view-id>/*</from-view-id>
+            <navigation-case>
+                <from-action>#{usersController.logout}</from-action>
+                <to-view-id>/login.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule> 
+        <navigation-rule>
+            <from-view-id>/*</from-view-id>
+            <navigation-case>
+                <from-action>#{companyController.prepareEdit}</from-action>
+                <to-view-id>/company/Edit.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule> 
+        <navigation-rule>
+            <from-view-id>/jobs/List.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{applicationsController.prepareApplicants}</from-action>
+                <to-view-id>/applications/Applicants.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule> 
+        <navigation-rule>
+            <from-view-id>/jobs/List.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{firstshortlistController.prepareShortList}</from-action>
+                <to-view-id>/firstshortlist/firstShortlist.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule> 
+        <navigation-rule>
+            <from-view-id>/jobs/List.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{secondshortlistController.prepareShortList}</from-action>
+                <to-view-id>/secondshortlist/secondShortlist.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule> 
+        <navigation-rule>
+            <from-view-id>/applications/Applicants.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{seekersController.viewSeeker}</from-action>
+                <to-view-id>/seekers/viewSeeker.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule> 
+        <navigation-rule>
+            <from-view-id>/firstshortlist/View.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{firstshortlistController.secondShortList}</from-action>
+                <to-view-id>/firstshortlist/View.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule> 
+        
+        
+        <navigation-rule>
+            <from-view-id>/registration/ResetPassword.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{registrationController.completeReset}</from-action>
+                <from-outcome>login</from-outcome>
+                <to-view-id>/public/loginError.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule> 
+        
+        
+        <navigation-rule>
+            <from-view-id>/registration/NewUser.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{registrationController.completeUserRegistration}</from-action>
+                <from-outcome>login</from-outcome>
+                <to-view-id>/public/loginError.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+        
+        <navigation-rule>
+            <from-view-id>/*</from-view-id>
+            <navigation-case>
+                <from-action>#{jobsController.ListMyJobs}</from-action>
+                <from-outcome>MyList</from-outcome>
+                <to-view-id>/jobs/MyList.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+
+         
+        <navigation-rule>
+            <from-view-id>/jobs/MyList.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{applicationsController.prepareApplicants}</from-action>
+                <from-outcome>Applicants</from-outcome>
+                <to-view-id>/applications/Applicants.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+
+        <navigation-rule>
+            <from-view-id>/jobs/MyList.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{firstshortlistController.prepareShortList}</from-action>
+                <from-outcome>firstShortlist</from-outcome>
+                <to-view-id>/firstshortlist/firstShortlist.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+        
+        
+        <navigation-rule>
+            <from-view-id>/jobs/MyList.xhtml</from-view-id>
+            <navigation-case>
+                <from-action>#{secondshortlistController.prepareShortList}</from-action>
+                <from-outcome>firstShortlist</from-outcome>
+                <to-view-id>/secondshortlist/secondShortlist.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+        
+        <navigation-rule>
+            <from-view-id>/*</from-view-id>
+            <navigation-case>
+                <from-action>#{applicationsController.getRecommendations}</from-action>
+                <from-outcome>Recommendations</from-outcome>
+                <to-view-id>/applications/Recommendations.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+        
+        
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
+</faces-config>

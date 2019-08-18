@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+
+      >
+
+    <ui:composition template="/template.xhtml">
+        <ui:param name="activeIndex" value="1" />
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEducationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <p:messages id="messages" autoUpdate="true" closable="true" />  
+                <p:commandButton action="#{educationController.prepareCreate}" value="#{bundle.ListEducationCreateLink}" ajax="false"/>
+                <br/>
+                <h:outputText escape="false" value="#{bundle.ListEducationEmpty}" rendered="#{educationController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{educationController.items.rowCount > 0}">
+                    <h:outputText value="#{educationController.pagination.pageFirstItem + 1}..#{educationController.pagination.pageLastItem + 1}/#{educationController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{educationController.previous}" value="#{bundle.Previous} #{educationController.pagination.pageSize}" rendered="#{educationController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{educationController.next}" value="#{bundle.Next} #{educationController.pagination.pageSize}" rendered="#{educationController.pagination.hasNextPage}"/>&nbsp;
+                    <p:dataTable value="#{educationController.items}" var="item" >
+
+                        <f:facet name="header">  
+                            <h:outputText value="#{bundle.ListEducationTitle}"></h:outputText>
+                        </f:facet> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEducationTitle_institution}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.institution}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEducationTitle_startdate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.startdate}">
+                                <f:convertDateTime timeZone="Africa/Nairobi" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEducationTitle_enddate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.enddate}">
+                                <f:convertDateTime timeZone="Africa/Nairobi" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEducationTitle_datemodified}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datemodified}">
+                                <f:convertDateTime dateStyle="full" type="both" timeZone="Africa/Nairobi" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <p:menuButton value="#{bundle.Options}">
+                                <p:menuitem>
+                                    <h:commandLink action="#{educationController.prepareView}" value="#{bundle.ListEducationViewLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{educationController.educationRecord}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                                <p:separator/>
+                                <p:menuitem>
+                                    <h:commandLink action="#{educationController.prepareEdit}" value="#{bundle.ListEducationEditLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{educationController.educationRecord}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                                <p:separator/>
+                                <p:menuitem>
+                                    <h:commandLink action="#{educationController.destroy}" value="#{bundle.ListEducationDestroyLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{educationController.educationRecord}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+
+                            </p:menuButton>
+
+
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
