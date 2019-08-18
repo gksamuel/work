@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewContactTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <p:panelGrid columns="2">
+                    <f:facet name="header">  
+                        <h:outputText  value="#{bundle.ViewContactTitle}"></h:outputText>
+                    </f:facet> 
+                    <h:outputText value="#{bundle.ViewContactLabel_comment}"/>
+                    <h:outputText value="#{contactController.selected.comment}" title="#{bundle.ViewContactTitle_comment}" escape="false"/>
+                    <h:outputText value="#{bundle.ViewContactLabel_commentdate}"/>
+                    <h:outputText value="#{contactController.selected.commentdate}" title="#{bundle.ViewContactTitle_commentdate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewContactLabel_response}"/>
+                    <h:outputText value="#{contactController.selected.response}" title="#{bundle.ViewContactTitle_response}"/>
+                    <h:outputText value="#{bundle.ViewContactLabel_responsedate}"/>
+                    <h:outputText value="#{contactController.selected.responsedate}" title="#{bundle.ViewContactTitle_responsedate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewContactLabel_userid}" rendered="#{contactController.selected.userid != null}"/>
+                    <h:outputText value="#{contactController.selected.userid.username}" title="#{bundle.ViewContactTitle_userid}" rendered="#{contactController.selected.userid != null}"/>
+                </p:panelGrid>
+
+                <p:commandButton action="#{contactController.prepareCreate}" value="#{bundle.ViewContactCreateLink}"  ajax="false"/>
+
+                <p:commandButton action="#{contactController.prepareList}" value="#{bundle.ViewContactShowAllLink}"  ajax="false"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

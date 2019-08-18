@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:param name="activeIndex" value="1" />
+        <ui:define name="title">
+
+            <h:outputText value="#{bundle.EditEducationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" autoUpdate="true" closable="true" />  
+            <h:form>
+                <p:commandButton action="#{educationController.update}" value="#{bundle.EditEducationSaveLink}" ajax="false"/>
+                <h:outputText value="&nbsp;&nbsp;"/>
+                <p:commandButton action="View" value="#{bundle.EditEducationViewLink}" ajax="false"/>
+                <h:outputText value="&nbsp;&nbsp;"/>
+                <h:link outcome="/education/List" value="#{bundle.EditEducationShowAllLink}"/>
+
+                <br/>
+                <p:panelGrid columns="2">
+                    <f:facet name="header">  
+                        <h:outputText value="#{bundle.EditEducationTitle}"></h:outputText>
+                    </f:facet> 
+                    <p:outputLabel value="#{bundle.EditEducationLabel_startdate}" for="startdate" />
+                    <p:calendar  id="startdate" value="#{educationController.selected.startdate}"   binding="#{startdate}"  mindate="-50y" maxdate="-1d" showOtherMonths="true"  selectOtherMonths="true" yearRange="c-50:c+10" pattern="dd/MM/yyyy" navigator="true" mode="popup"  required="true"  requiredMessage="#{bundle.EditEducationEnterStartDate}"/>
+                    <p:outputLabel value="#{bundle.EditEducationLabel_enddate}" for="enddate" />
+                    <p:calendar  id="enddate" value="#{educationController.selected.enddate}" mindate="-50y" maxdate="-1d" showOtherMonths="true"  selectOtherMonths="true" yearRange="c-50:c+10" pattern="dd/MM/yyyy" navigator="true" mode="popup"  required="true"  requiredMessage="#{bundle.EditEducationEnterEndDate}">
+                        <f:attribute name="startdate" value="#{startdate.value}" />
+                        <f:validator validatorId="validator.EducationDateValidator" />
+                    </p:calendar>
+                    <p:outputLabel value="#{bundle.EditEducationLabel_institution}" for="institution" />
+                    <p:inputText id="institution" value="#{educationController.selected.institution}" title="#{bundle.EditEducationTitle_institution}" required="true" requiredMessage="#{bundle.EditEducationEnterInstituton}" />
+                    <p:outputLabel value="#{bundle.EditEducationLabel_website}" for="website" />
+                    <p:inputText id="website" value="#{educationController.selected.website}" title="#{bundle.EditEducationTitle_website}" />
+                    <p:outputLabel value="#{bundle.EditEducationLabel_location}" for="location" />
+                    <p:inputText id="location" value="#{educationController.selected.location}" title="#{bundle.EditEducationTitle_location}" />
+                    <p:outputLabel value="#{bundle.EditEducationLabel_certification}" for="certification" />
+                    <p:inputText id="certification" value="#{educationController.selected.certification}" title="#{bundle.EditEducationTitle_certification}"  required="true" requiredMessage="#{bundle.EditEducationEnterCertification}"/>
+                    <p:outputLabel value="#{bundle.EditEducationLabel_refereename}" for="refereename" />
+                    <p:inputText id="refereename" value="#{educationController.selected.refereename}" title="#{bundle.EditEducationTitle_refereename}" />
+                    <p:outputLabel value="#{bundle.EditEducationLabel_address}" for="address" />
+                    <p:inputText id="address" value="#{educationController.selected.address}" title="#{bundle.EditEducationTitle_address}" />
+                    <p:outputLabel value="#{bundle.EditEducationLabel_email}" for="email" />
+                    <p:inputText id="email" value="#{educationController.selected.email}" title="#{bundle.EditEducationTitle_email}" />
+                    <p:outputLabel value="#{bundle.EditEducationLabel_mobileno}" for="mobileno" />
+                    <p:inputText id="mobileno" value="#{educationController.selected.mobileno}" title="#{bundle.EditEducationTitle_mobileno}" />
+
+                </p:panelGrid>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

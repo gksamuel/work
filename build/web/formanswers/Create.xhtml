@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateFormanswersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" autoUpdate="true" closable="true" />  
+            <h:form id="answerForm">
+                Question #{formanswersController.questionNum} of  #{formanswersController.numQuestions}
+                <p:progressBar value="#{formanswersController.progress}" labelTemplate="{value}%" displayOnly="false" style="border: 1px solid #3a4f54;margin: 1px; padding: 0px;"/><br/>
+                <h:inputHidden  id="formid" value="#{formanswersController.formid}"/>
+                <p:panelGrid columns="2">
+                    <f:facet name="header">  
+                        <h:outputText value="#{bundle.CreatePagesTitle} #{formanswersController.questionNum}"></h:outputText>
+                    </f:facet> 
+                    <h:outputLabel value="#{bundle.CreateFormanswersLabel_question}" for="question" />
+                    <h:outputText id="questionText" value="#{formanswersController.question}"/>
+                    <h:outputLabel value="#{bundle.CreateFormanswersLabel_answer}" for="answer" />
+                    <h:inputText id="answer" value="#{formanswersController.selected.answer}" title="#{bundle.CreateFormanswersTitle_answer}" required="true" requiredMessage="#{bundle.CreateFormanswersRequiredMessage_answer}"/>
+                </p:panelGrid>
+                <h:inputHidden id="formquestionid" value="#{formanswersController.formquestionID}" />
+                <h:inputHidden id="questionNum" value="#{formanswersController.questionNum}" />
+                <h:inputHidden id="question" value="#{formanswersController.question}" />
+                <br />
+                <p:commandButton action="#{formanswersController.createUpdate}" value="#{bundle.CreateFormanswersSaveLink}"  ajax="false" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

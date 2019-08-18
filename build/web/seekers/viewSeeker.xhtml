@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.Profile}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" autoUpdate="true" closable="true" />  
+
+            <h:form>
+                <h:outputText value="#{applicationsController.job.title}"/>
+                <h:inputText id="seekerid" value="#{applicationsController.seekerid}" />
+
+
+                <h:commandLink action="#{applicationsController.firstShortList}" value="#{bundle.ShortList}"/>
+
+
+                <p:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewSeekersLabel_username}"/>
+                    <h:outputText value="#{seekersController.selected.username}" title="#{bundle.ViewSeekersTitle_username}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_expiry}"/>
+                    <h:outputText value="#{seekersController.selected.expiry}" title="#{bundle.ViewSeekersTitle_expiry}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_email}"/>
+                    <h:outputText value="#{seekersController.selected.email}" title="#{bundle.ViewSeekersTitle_email}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_mobile}"/>
+                    <h:outputText value="#{seekersController.selected.mobile}" title="#{bundle.ViewSeekersTitle_mobile}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_othernumber}"/>
+                    <h:outputText value="#{seekersController.selected.othernumber}" title="#{bundle.ViewSeekersTitle_othernumber}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_photo}"/>
+                    <h:outputText value="#{seekersController.selected.photo}" title="#{bundle.ViewSeekersTitle_photo}" />
+                    <h:outputText value="#{bundle.ViewSeekersLabel_firstname}"/>
+                    <h:outputText value="#{seekersController.selected.firstname}" title="#{bundle.ViewSeekersTitle_firstname}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_lastname}"/>
+                    <h:outputText value="#{seekersController.selected.lastname}" title="#{bundle.ViewSeekersTitle_lastname}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_middlename}"/>
+                    <h:outputText value="#{seekersController.selected.middlename}" title="#{bundle.ViewSeekersTitle_middlename}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_address}"/>
+                    <h:outputText value="#{seekersController.selected.address}" title="#{bundle.ViewSeekersTitle_address}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_dateofbirth}"/>
+                    <h:outputText value="#{seekersController.selected.dateofbirth}" title="#{bundle.ViewSeekersTitle_dateofbirth}">
+                        <f:convertDateTime timeZone="Africa/Nairobi"  dateStyle="long" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_gender}"/>
+                    <h:outputText value="#{seekersController.selected.gender}" title="#{bundle.ViewSeekersTitle_gender}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_website}"/>
+                    <h:outputText value="#{seekersController.selected.website}" title="#{bundle.ViewSeekersTitle_website}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_maritalstatus}"/>
+                    <h:outputText value="#{seekersController.selected.maritalstatus}" title="#{bundle.ViewSeekersTitle_maritalstatus}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_idnumber}"/>
+                    <h:outputText value="#{seekersController.selected.idnumber}" title="#{bundle.ViewSeekersTitle_idnumber}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_pinnumber}"/>
+                    <h:outputText value="#{seekersController.selected.pinnumber}" title="#{bundle.ViewSeekersTitle_pinnumber}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_passport}"/>
+                    <h:outputText value="#{seekersController.selected.passport}" title="#{bundle.ViewSeekersTitle_passport}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_driverslicence}"/>
+                    <h:outputText value="#{seekersController.selected.driverslicence}" title="#{bundle.ViewSeekersTitle_driverslicence}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_points}"/>
+                    <h:outputText value="#{seekersController.selected.points}" title="#{bundle.ViewSeekersTitle_points}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_datemodified}"/>
+                    <h:outputText value="#{seekersController.selected.datemodified}" title="#{bundle.ViewSeekersTitle_datemodified}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_statusid}"/>
+                    <h:outputText value="#{seekersController.selected.statusid}" title="#{bundle.ViewSeekersTitle_statusid}"/>
+                    <h:outputText value="#{bundle.ViewSeekersLabel_salaryid}"/>
+                    <h:outputText value="#{seekersController.selected.salaryid}" title="#{bundle.ViewSeekersTitle_salaryid}"/>
+                </p:panelGrid>
+
+                <hr/>
+
+                <h:outputText value="#{bundle.ListWorkTitle}"></h:outputText>
+
+                <h:dataTable value="#{seekersController.selected.workCollection}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListWorkTitle_company}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.company}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListWorkTitle_startdate}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.startdate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListWorkTitle_enddate}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.enddate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </h:column>
+
+
+                </h:dataTable>
+
+                <h:outputText value="#{bundle.ListEducationTitle}"></h:outputText>
+
+                <h:dataTable value="#{seekersController.selected.educationCollection}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListEducationTitle_institution}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.institution}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListEducationTitle_startdate}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.startdate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListEducationTitle_enddate}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.enddate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </h:column>
+
+
+                </h:dataTable>
+                <hr/>
+                <h:outputText value="#{bundle.ListFilesTitle}"></h:outputText>
+
+                <h:dataTable value="#{seekersController.selected.filesCollection}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListFilesTitle_description}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListFilesTitle_filename}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.filename}"/>
+                    </h:column>
+
+
+                </h:dataTable>
+                <hr/>
+                <h:outputText value="#{bundle.ListPagesTitle}"></h:outputText>
+
+                <h:dataTable value="#{seekersController.selected.pagesCollection}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPagesTitle_title}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.title}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPagesTitle_datemodified}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.datemodified}">
+                            <f:convertDateTime dateStyle="full" type="both" timeZone="Africa/Nairobi" />
+                        </h:outputText>
+                    </h:column>
+
+
+
+                </h:dataTable>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

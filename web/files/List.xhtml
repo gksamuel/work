@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <ui:composition template="/template.xhtml">
+        <ui:param name="activeIndex" value="2" />
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListFilesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+
+                <p:messages id="messages" autoUpdate="true" closable="true" />  
+             
+                <p:commandButton action="#{filesController.prepareCreate}" value="#{bundle.ListFilesCreateLink}" ajax="false"/><br/>
+                <h:outputText escape="false" value="#{bundle.ListFilesEmpty}" rendered="#{filesController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{filesController.items.rowCount > 0}">
+                    <h:outputText value="#{filesController.pagination.pageFirstItem + 1}..#{filesController.pagination.pageLastItem + 1}/#{filesController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{filesController.previous}" value="#{bundle.Previous} #{filesController.pagination.pageSize}" rendered="#{filesController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{filesController.next}" value="#{bundle.Next} #{filesController.pagination.pageSize}" rendered="#{filesController.pagination.hasNextPage}"/>&nbsp;
+                    <p:dataTable value="#{filesController.items}" var="item" >
+
+                        <f:facet name="header">  
+                            <h:outputText value="#{bundle.ListFilesTitle}"></h:outputText>
+                        </f:facet> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFilesTitle_filename}"/>
+                            </f:facet>
+                            <h:commandLink action="#{filesController.download()}" value="#{item.originalfilename}">
+                                <f:setPropertyActionListener value="#{item}" target="#{filesController.file}" />
+                            </h:commandLink>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFilesTitle_viewable}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.viewable}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFilesTitle_filecategoryid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.filecategoryid.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFilesTitle_datemodified}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datemodified}">
+                                <f:convertDateTime dateStyle="full" type="both" timeZone="Africa/Nairobi" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <p:menuButton value="#{bundle.Options}">
+                                <p:menuitem>
+                                    <h:commandLink action="#{filesController.prepareView}" value="#{bundle.ListFilesViewLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{filesController.file}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                                <p:separator/>
+                                <p:menuitem>
+                                    <h:commandLink action="#{filesController.destroy}" value="#{bundle.ListFilesDestroyLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{filesController.file}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                                <p:separator/>
+                                <p:menuitem>
+                                    <h:commandLink action="#{filesController.download()}" value="#{bundle.ListFilesDownloadLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{filesController.file}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                            </p:menuButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

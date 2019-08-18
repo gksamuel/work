@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewFormsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" autoUpdate="true" closable="true" />  
+
+            <p:panel id="basic" header="#{bundle.ViewFormquestionsCreateLink}">
+                <h:form id="questionForm">
+                    <h:inputHidden id="formid" value="#{formsController.selected}"/>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.CreateFormquestionsLabel_question}" for="question" />
+                        <p:inputText id="question" value="#{formquestionsController.selected.question}" title="#{bundle.CreateFormquestionsTitle_question}" required="true" requiredMessage="#{bundle.CreateFormquestionsRequiredMessage_question}"/>
+                    </h:panelGrid>
+                    <br />
+                    <p:commandButton value="#{bundle.CreateFormquestionsSaveLink}" id="saveQuestion" process="@all" update=":questionDetails" actionListener="#{formquestionsController.create}" />
+                </h:form>
+            </p:panel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <p:panel id="questionDetails" header="#{bundle.ViewFormquestionsTitle}">
+                <h:form id="questionView">
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">  
+                            <h:outputText value="#{bundle.ViewFormTitle}"></h:outputText>
+                        </f:facet> 
+                        <h:outputText value="#{bundle.ViewFormsLabel_title}"/>
+                        <h:outputText value="#{formsController.selected.title}" title="#{bundle.ViewFormsTitle_title}"/>
+                        <h:outputText value="#{bundle.ViewFormsLabel_description}"/>
+                        <h:outputText value="#{formsController.selected.description}" title="#{bundle.ViewFormsTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewFormsLabel_datemodified}"/>
+                        <h:outputText value="#{formsController.selected.datemodified}" title="#{bundle.ViewFormsTitle_datemodified}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewFormsLabel_userid}"/>
+                        <h:outputText value="#{formsController.selected.userid.username}" title="#{bundle.ViewFormsTitle_userid}"/>
+                    </p:panelGrid>
+
+                    <p:panel id="questionDetails" header="#{bundle.ViewFormquestionsQuestions}">
+                     
+                        <p:dataTable id="questionlist" value="#{formsController.selected.formquestionsCollection}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListFormsTitle_title}"/>
+                                </f:facet>
+                                <p:inplace id="ajax" editor="true">
+                                    <p:inputText value="#{item.question}" required="true" label="text" />
+                                </p:inplace>
+                            </p:column>
+                            <p:column>
+                                <h:commandLink action="#{formquestionsController.update()}" value="#{bundle.EditFormquestionsSaveLink}">
+                                    <f:setPropertyActionListener value="#{item}" target="#{formquestionsController.selected}" />
+                                </h:commandLink>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+
+</html>

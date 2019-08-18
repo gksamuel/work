@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSecondshortlistTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListSecondshortlistEmpty}" rendered="#{secondshortlistController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{secondshortlistController.items.rowCount > 0}">
+                    <h:outputText value="#{secondshortlistController.pagination.pageFirstItem + 1}..#{secondshortlistController.pagination.pageLastItem + 1}/#{secondshortlistController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{secondshortlistController.previous}" value="#{bundle.Previous} #{secondshortlistController.pagination.pageSize}" rendered="#{secondshortlistController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{secondshortlistController.next}" value="#{bundle.Next} #{secondshortlistController.pagination.pageSize}" rendered="#{secondshortlistController.pagination.hasNextPage}"/>&nbsp;
+                    <p:dataTable value="#{secondshortlistController.items}" var="item"  style="border:solid 1px">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSecondshortlistTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSecondshortlistTitle_internalcomment}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.internalcomment}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSecondshortlistTitle_seekercomment}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.seekercomment}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSecondshortlistTitle_publiccomment}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.publiccomment}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSecondshortlistTitle_datemodified}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datemodified}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSecondshortlistTitle_hired}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hired}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSecondshortlistTitle_userid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userid}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSecondshortlistTitle_seekerid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.seekerid}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSecondshortlistTitle_jobid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.jobid}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{secondshortlistController.prepareView}" value="#{bundle.ListSecondshortlistViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{secondshortlistController.prepareEdit}" value="#{bundle.ListSecondshortlistEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{secondshortlistController.destroy}" value="#{bundle.ListSecondshortlistDestroyLink}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{secondshortlistController.prepareCreate}" value="#{bundle.ListSecondshortlistCreateLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:param name="activeIndex" value="5" />
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListJobsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <p:messages id="messages" autoUpdate="true" closable="true" />  
+
+                <p:commandButton action="#{jobsController.prepareCreate}" value="#{bundle.ListJobsCreateLink}" ajax="false"/>
+                <br />
+                <h:outputText escape="false" value="#{bundle.ListJobsEmpty}" rendered="#{jobsController.myItems.rowCount == 0}"/>
+                <h:panelGroup rendered="#{jobsController.myItems.rowCount > 0}">
+                    <h:outputText value="#{jobsController.pagination.pageFirstItem + 1}..#{jobsController.myPagination.pageLastItem + 1}/#{jobsController.myPagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{jobsController.previous}" value="#{bundle.Previous} #{jobsController.pagination.pageSize}" rendered="#{jobsController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{jobsController.next}" value="#{bundle.Next} #{jobsController.pagination.pageSize}" rendered="#{jobsController.pagination.hasNextPage}"/>&nbsp;
+
+                    <p:dataTable value="#{jobsController.myItems}" var="item">
+                        <f:facet name="header">  
+                            <h:outputText value="#{bundle.ListJobsTitle}"></h:outputText>
+                        </f:facet> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListJobsTitle_referenceno}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.referenceno}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListJobsTitle_title}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.title}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListJobsTitle_startdate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.startdate}">
+                                <f:convertDateTime   timeZone="Africa/Nairobi"  />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListJobsTitle_enddate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.enddate}">
+                                <f:convertDateTime   timeZone="Africa/Nairobi"  />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListJobsTitle_datemodified}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datemodified}">
+                                <f:convertDateTime dateStyle="medium" type="date"  timeZone="Africa/Nairobi" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <p:menuButton value="#{bundle.Options}">
+                                <p:menuitem>
+                                    <h:commandLink action="#{applicationsController.getRecommendations}" value="#{bundle.getRecommendations}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{applicationsController.job}" />
+                                    </h:commandLink>
+                                </p:menuitem>  
+
+                                <p:separator />  
+                                <p:menuitem>
+                                    <h:commandLink action="#{applicationsController.prepareApplicants}" value="#{bundle.listApplicants}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{applicationsController.job}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                                <p:separator />  
+
+
+                                <p:menuitem>
+                                    <h:commandLink action="#{firstshortlistController.prepareShortList}" value="#{bundle.ListFirstShortList}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{firstshortlistController.job}" />
+                                    </h:commandLink>
+
+                                </p:menuitem>
+
+                                <p:separator />  
+
+
+
+                                <p:menuitem>
+                                    <h:commandLink action="#{secondshortlistController.prepareShortList}" value="#{bundle.ListSecondShortList}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{secondshortlistController.job}" />
+                                    </h:commandLink>
+
+                                </p:menuitem>
+
+
+                                <p:separator />  
+
+                                <p:menuitem>
+
+                                    <h:commandLink action="#{jobsController.prepareView}" value="#{bundle.ListJobsViewLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{jobsController.jobRecord}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                                <p:separator />  
+
+                                <p:menuitem>
+                                    <h:commandLink action="#{jobsController.prepareEdit}" value="#{bundle.ListJobsEditLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{jobsController.jobRecord}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                            </p:menuButton>
+
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

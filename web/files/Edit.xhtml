@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:param name="activeIndex" value="2" />
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditFilesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" autoUpdate="true" closable="true" />  
+            <h:form>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.EditFilesLabel_name}" for="name" />
+                    <p:inputText id="name" value="#{filesController.selected.name}" title="#{bundle.EditFilesTitle_name}" />
+                    <p:outputLabel value="#{bundle.EditFilesLabel_description}" for="description" />
+                    <p:inputText id="description" value="#{filesController.selected.description}" title="#{bundle.EditFilesTitle_description}" />
+                    <p:outputLabel value="#{bundle.EditFilesLabel_filename}" for="filename" />
+                    <p:inputText id="filename" value="#{filesController.selected.filename}" title="#{bundle.EditFilesTitle_filename}" />
+
+                </p:panelGrid>
+                <p:commandButton action="#{filesController.update}" value="#{bundle.EditFilesSaveLink}" ajax="false"/>
+                <h:outputText value="&nbsp;&nbsp;"/>
+                <p:commandButton action="View" value="#{bundle.EditFilesViewLink}" ajax="false"/>
+                <h:outputText value="&nbsp;&nbsp;"/>
+                <p:commandButton action="#{filesController.prepareList}" value="#{bundle.EditFilesShowAllLink}" ajax="false"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

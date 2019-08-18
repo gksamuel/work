@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateThirdshortlistTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.CreateThirdshortlistLabel_internalcomment}" for="internalcomment" />
+                    <h:inputText id="internalcomment" value="#{thirdshortlistController.selected.internalcomment}" title="#{bundle.CreateThirdshortlistTitle_internalcomment}" />
+                    <p:outputLabel value="#{bundle.CreateThirdshortlistLabel_seekercomment}" for="seekercomment" />
+                    <h:inputText id="seekercomment" value="#{thirdshortlistController.selected.seekercomment}" title="#{bundle.CreateThirdshortlistTitle_seekercomment}" />
+                    <p:outputLabel value="#{bundle.CreateThirdshortlistLabel_publiccomment}" for="publiccomment" />
+                    <h:inputText id="publiccomment" value="#{thirdshortlistController.selected.publiccomment}" title="#{bundle.CreateThirdshortlistTitle_publiccomment}" />
+                    <p:outputLabel value="#{bundle.CreateThirdshortlistLabel_hired}" for="hired" />
+                    <h:inputText id="hired" value="#{thirdshortlistController.selected.hired}" title="#{bundle.CreateThirdshortlistTitle_hired}" />
+                    <p:outputLabel value="#{bundle.CreateThirdshortlistLabel_userid}" for="userid" />
+                    <h:selectOneMenu id="userid" value="#{thirdshortlistController.selected.userid}" title="#{bundle.CreateThirdshortlistTitle_userid}" >
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreateThirdshortlistLabel_jobid}" for="jobid" />
+                    <h:selectOneMenu id="jobid" value="#{thirdshortlistController.selected.jobid}" title="#{bundle.CreateThirdshortlistTitle_jobid}" >
+                        <f:selectItems value="#{jobsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{thirdshortlistController.create}" value="#{bundle.CreateThirdshortlistSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{thirdshortlistController.prepareList}" value="#{bundle.CreateThirdshortlistShowAllLink}" immediate="true"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

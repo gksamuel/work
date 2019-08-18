@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditSecondshortlistTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.EditSecondshortlistLabel_id}" for="id" />
+                    <p:inputText id="id" value="#{secondshortlistController.selected.id}" title="#{bundle.EditSecondshortlistTitle_id}" required="true" requiredMessage="#{bundle.EditSecondshortlistRequiredMessage_id}"/>
+                    <p:outputLabel value="#{bundle.EditSecondshortlistLabel_internalcomment}" for="internalcomment" />
+                    <p:inputText id="internalcomment" value="#{secondshortlistController.selected.internalcomment}" title="#{bundle.EditSecondshortlistTitle_internalcomment}" />
+                    <p:outputLabel value="#{bundle.EditSecondshortlistLabel_seekercomment}" for="seekercomment" />
+                    <p:inputText id="seekercomment" value="#{secondshortlistController.selected.seekercomment}" title="#{bundle.EditSecondshortlistTitle_seekercomment}" />
+                    <p:outputLabel value="#{bundle.EditSecondshortlistLabel_publiccomment}" for="publiccomment" />
+                    <p:inputText id="publiccomment" value="#{secondshortlistController.selected.publiccomment}" title="#{bundle.EditSecondshortlistTitle_publiccomment}" />
+                    <p:outputLabel value="#{bundle.EditSecondshortlistLabel_datemodified}" for="datemodified" />
+                    <p:inputText id="datemodified" value="#{secondshortlistController.selected.datemodified}" title="#{bundle.EditSecondshortlistTitle_datemodified}" required="true" requiredMessage="#{bundle.EditSecondshortlistRequiredMessage_datemodified}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </p:inputText>
+                    <p:outputLabel value="#{bundle.EditSecondshortlistLabel_hired}" for="hired" />
+                    <p:inputText id="hired" value="#{secondshortlistController.selected.hired}" title="#{bundle.EditSecondshortlistTitle_hired}" />
+                    <p:outputLabel value="#{bundle.EditSecondshortlistLabel_userid}" for="userid" />
+                    <h:selectOneMenu id="userid" value="#{secondshortlistController.selected.userid}" title="#{bundle.EditSecondshortlistTitle_userid}" >
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <p:outputLabel value="#{bundle.EditSecondshortlistLabel_seekerid}" for="seekerid" />
+                    <h:selectOneMenu id="seekerid" value="#{secondshortlistController.selected.seekerid}" title="#{bundle.EditSecondshortlistTitle_seekerid}" >
+                        <f:selectItems value="#{seekersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <p:outputLabel value="#{bundle.EditSecondshortlistLabel_jobid}" for="jobid" />
+                    <h:selectOneMenu id="jobid" value="#{secondshortlistController.selected.jobid}" title="#{bundle.EditSecondshortlistTitle_jobid}" >
+                        <f:selectItems value="#{jobsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton action="#{secondshortlistController.update}" value="#{bundle.EditSecondshortlistSaveLink}"/>
+                <br />
+                <br />
+                <p:commandButton action="View" value="#{bundle.EditSecondshortlistViewLink}" immediate="true"/>
+                <br />
+                <p:commandButton action="#{secondshortlistController.prepareList}" value="#{bundle.EditSecondshortlistShowAllLink}" immediate="true"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

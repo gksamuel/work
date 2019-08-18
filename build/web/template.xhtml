@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>#{bundle.pageTitle} <ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <f:facet name="last">
+            <style type="text/css">
+                .ui-layout-unit .ui-layout-unit-content {border: 0 none;  padding: 0px;}.ui-layout-unit{padding:0px;}
+                .ui-fieldset, .ui-fieldset .ui-fieldset-legend { padding: 0px; border:0px;}
+                #west .ui-panel .ui-panel-content{padding: 0px;}
+                #mainBody .ui-widget-content{padding:5px;}
+                #mainBody{padding:5px;overflow: scroll;}
+                #homeForm .ui-widget-content{margin:10px;}
+                html{overflow:  visible !important;}
+                .ui-layout-resizer{background-color: #fff; margin:0; padding:0px; border:0px;}
+                .ui-tooltip{width: 300px;height: 75px;background-color:#000; color: #fff; font-weight: bolder;}
+                .ui-layout-container{margin: auto !important; width:1000px !important; overflow:visible !important;}
+                html, body {height: 100% !important;}
+            </style>
+        </f:facet>
+    </h:head>
+    <h:body id="body">
+        <meta name="google-signin-client_id" content="832927615145-9mkei4omon7ir5v0qc93njq93ohi1br4.apps.googleusercontent.com"></meta>
+
+        <script>
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                });
+            }
+
+
+            function onLoad() {
+                gapi.load('auth2', function () {
+                    gapi.auth2.init();
+                });
+            }
+        </script>
+        <script src="https://apis.google.com/js/platform.js?onload=onLoad" async="true" defer="true"></script>
+
+        <p:layout  id="fullPage1" fullPage="false" style="height: 100%; background-color: #fff;">
+            <p:layoutUnit id="north" position="north">
+                <h:form id="topform" style="overflow: hidden;">
+                    <p:panel style="text-align: right;padding:0px;height:80px;" >
+                        <p:panel style="border:0px;width:175px; float:left; padding:0px;">
+                            <h:graphicImage value="#{resource['icons:logo.png']}"/>
+                        </p:panel>
+                        <h:outputText value="#{request.remoteUser}"  style="font-weight: bold;"/>&nbsp;&nbsp;
+                        <p:commandButton value="#{bundle.HomeButton}" action="/index" ajax="false" icon="ui-icon-home"/>
+                        <p:commandButton value="#{bundle.logout}" action="#{usersController.logout}" ajax="false" icon="ui-icon-power" onclick="signOut();"/>
+                    </p:panel>
+                    <f:event listener="#{tabBean.changeTab}" type="postAddToView"/>
+
+                    <ui:fragment  rendered="#{facesContext.externalContext.isUserInRole('seekers')}">
+                        <p:tabMenu activeIndex="#{tabBean.activeTabIndex}" id="tabmenu">  
+                            <p:menuitem value="#{bundle.ListMyEmployment}" url="/faces/work/List.xhtml" icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.ListMyEducation}" url="/faces/education/List.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.ListMyFiles}" url="/faces/files/List.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.ListMyCoverLetters}" url="/faces/coverletters/List.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.ListMyPages}" url="/faces/pages/List.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.MyProfile}" url="/faces/seekers/Edit.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.MyPassword}" url="/faces/seekers/Password.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.MyPhoto}" url="/faces/seekers/Photo.xhtml"  icon="ui-icon-star"/>
+                        </p:tabMenu> 
+                    </ui:fragment>
+
+                    <ui:fragment   rendered="#{facesContext.externalContext.isUserInRole('companies')}" >
+                        <p:tabMenu activeIndex="#{tabBean.activeTabIndex}"  rendered="#{usersController.userRecord.accountid.mainaccount}">  
+                            <p:menuitem value="#{bundle.worklist}"  url="/faces/jobs/List.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.mylist}"   url="/faces/jobs/MyList.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.menuLabel_accounts}"  url="/faces/accounts/List.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.usersList}" url="/faces/users/List.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.companyname}"  url="/faces/company/Edit.xhtml"   icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.MyProfile}" url="/faces/users/MyDetails.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.companyLogo}"  url="/faces/company/Photo.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.MyPassword}" url="/faces/users/Password.xhtml"  icon="ui-icon-star"/>  
+                        </p:tabMenu> 
+
+                        <p:tabMenu activeIndex="#{tabBean.activeTabIndex}"  rendered="#{!usersController.userRecord.accountid.mainaccount}">  
+                            <p:menuitem value="#{bundle.MyProfile}" url="/faces/users/MyDetails.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.MyPassword}" url="/faces/users/Password.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.worklist}"  url="/faces/jobs/List.xhtml"  icon="ui-icon-star"/>  
+                            <p:menuitem value="#{bundle.mylist}"   url="/faces/jobs/MyList.xhtml"  icon="ui-icon-star"/>  
+                        </p:tabMenu> 
+                    </ui:fragment>
+                </h:form>
+            </p:layoutUnit>
+
+
+            <p:layoutUnit id="west" position="west" size="200" header="&nbsp;" collapsible="false">
+
+
+                <p:menu style="margin: auto;margin-top:10px;">
+                    <p:submenu label="Resources">
+                        <p:menuitem value="#{bundle.searchVacancies}" url="/faces/jobs/search.xhtml" icon="ui-icon-plus" rendered="#{facesContext.externalContext.isUserInRole('seekers')}"/>
+                        <p:separator rendered="#{facesContext.externalContext.isUserInRole('seekers')}"/>
+                        <p:menuitem value="#{bundle.CreateJobsShowAllLink}" url="/faces/jobs/Browse.xhtml"  icon="ui-icon-plus" rendered="#{facesContext.externalContext.isUserInRole('seekers')}" />
+                        <p:separator rendered="#{facesContext.externalContext.isUserInRole('seekers')}"/>
+                        <p:menuitem value="#{bundle.ListMyApplications}" url="/faces/applications/List.xhtml"   icon="ui-icon-plus" rendered="#{facesContext.externalContext.isUserInRole('seekers')}"/>
+                        <p:separator rendered="#{facesContext.externalContext.isUserInRole('seekers')}"/>
+                        <p:menuitem value="#{bundle.membershipExtension}"  icon="ui-icon-plus" url="/faces/public/Extension.xhtml" rendered="#{facesContext.externalContext.isUserInRole('seekers')}"/>
+                        <p:separator rendered="#{facesContext.externalContext.isUserInRole('seekers')}"/>
+                        <p:menuitem value="#{bundle.myMpesaPayments}"  icon="ui-icon-plus" url="/faces/mpesa/List.xhtml" rendered="#{facesContext.externalContext.isUserInRole('seekers')}"/>
+                        <p:separator rendered="#{facesContext.externalContext.isUserInRole('seekers')}"/>
+                        <p:menuitem value="#{bundle.CompanyForms}"  icon="ui-icon-plus" url="/faces/forms/List.xhtml" rendered="#{facesContext.externalContext.isUserInRole('companies')}"/>
+                        <p:separator rendered="#{facesContext.externalContext.isUserInRole('companies')}"/>
+                        <p:menuitem value="#{bundle.membershipExtension}"  icon="ui-icon-plus" url="/faces/public/Extension.xhtml" rendered="#{(facesContext.externalContext.isUserInRole('companies')) and (usersController.userRecord.accountid.mainaccount)}"/>
+                        <p:separator rendered="#{(facesContext.externalContext.isUserInRole('companies')) and (usersController.userRecord.accountid.mainaccount)}"/>
+                        <p:menuitem value="#{bundle.CompanyMpesaPayments}"  icon="ui-icon-plus" url="/faces/mpesa/List.xhtml" rendered="#{facesContext.externalContext.isUserInRole('companies')}"/>
+                        <p:separator rendered="#{facesContext.externalContext.isUserInRole('companies')}"/>
+                        <p:menuitem value="#{bundle.ContactUs}"  icon="ui-icon-plus" url="/faces/contact/List.xhtml" />
+                        <p:separator/>
+                        <p:menuitem value="#{bundle.Tip}" icon="ui-icon-plus" url="/faces/tip/View.xhtml" />
+                    </p:submenu>
+                </p:menu>
+
+
+            </p:layoutUnit>
+
+
+            <p:layoutUnit id="mainBody" position="center">
+
+                <ui:insert name="body">Default Body</ui:insert>
+
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="62" closable="true" collapsible="true" style="background-color:#000;">
+                <h:graphicImage value="#{resource['img2:silver.png']}"/>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>

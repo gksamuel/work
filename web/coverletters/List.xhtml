@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <ui:composition template="/template.xhtml">
+        <ui:param name="activeIndex" value="3" />
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCoverlettersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <p:messages id="messages" autoUpdate="true" closable="true" />  
+            
+                <p:commandButton action="#{coverlettersController.prepareCreate}" value="#{bundle.ListCoverlettersCreateLink}" ajax="false"/>
+                <br/>
+                <h:outputText escape="false" value="#{bundle.ListCoverlettersEmpty}" rendered="#{coverlettersController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{coverlettersController.items.rowCount > 0}">
+                    <h:outputText value="#{coverlettersController.pagination.pageFirstItem + 1}..#{coverlettersController.pagination.pageLastItem + 1}/#{coverlettersController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{coverlettersController.previous}" value="#{bundle.Previous} #{coverlettersController.pagination.pageSize}" rendered="#{coverlettersController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{coverlettersController.next}" value="#{bundle.Next} #{coverlettersController.pagination.pageSize}" rendered="#{coverlettersController.pagination.hasNextPage}"/>&nbsp;
+                    <p:dataTable value="#{coverlettersController.items}" var="item">
+
+                        <f:facet name="header">  
+                            <h:outputText value="#{bundle.ListCoverlettersTitle}"></h:outputText>
+                        </f:facet> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCoverlettersTitle_name}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.name}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCoverlettersTitle_datemodified}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datemodified}">
+                                <f:convertDateTime dateStyle="full" type="both" timeZone="Africa/Nairobi" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <p:menuButton value="#{bundle.Options}">
+                                <p:menuitem>
+                                    <h:commandLink action="#{coverlettersController.prepareView}" value="#{bundle.ListCoverlettersViewLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{coverlettersController.coverLetterRecord}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                                <p:separator/>
+                                <p:menuitem>
+                                    <h:commandLink action="#{coverlettersController.prepareEdit}" value="#{bundle.ListCoverlettersEditLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{coverlettersController.coverLetterRecord}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+                                <p:separator/>
+                                <p:menuitem>
+                                    <h:commandLink action="#{coverlettersController.destroy}" value="#{bundle.ListCoverlettersDestroyLink}">
+                                        <f:setPropertyActionListener value="#{item}" target="#{coverlettersController.coverLetterRecord}" />
+                                    </h:commandLink>
+                                </p:menuitem>
+
+
+                            </p:menuButton>
+
+
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

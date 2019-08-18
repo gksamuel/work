@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+          <ui:param name="activeIndex" value="0" />
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewWorkTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" autoUpdate="true" closable="true" />  
+            <h:form>
+                <p:commandButton action="#{workController.destroyAndView}" value="#{bundle.ViewWorkDestroyLink}" ajax="false"/>
+                <h:outputText value="&nbsp;&nbsp;"/>
+                <p:commandButton action="Edit" value="#{bundle.ViewWorkEditLink}" ajax="false"/>
+                <h:outputText value="&nbsp;&nbsp;"/>
+                <h:link outcome="/work/List" value="#{bundle.ViewWorkShowAllLink}"/>
+
+                <br/>
+                <p:panelGrid columns="2">
+                    <f:facet name="header">  
+                        <h:outputText value="#{bundle.ViewWorkTitle}"></h:outputText>
+                    </f:facet> 
+                    <h:outputText value="#{bundle.ViewWorkLabel_startdate}"/>
+                    <h:outputText value="#{workController.selected.startdate}" title="#{bundle.ViewWorkTitle_startdate}">
+                        <f:convertDateTime timeZone="Africa/Nairobi" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewWorkLabel_enddate}"/>
+                    <h:outputText value="#{workController.selected.enddate}" title="#{bundle.ViewWorkTitle_enddate}">
+                        <f:convertDateTime timeZone="Africa/Nairobi" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewWorkLabel_company}"/>
+                    <h:outputText value="#{workController.selected.company}" title="#{bundle.ViewWorkTitle_company}"/>
+                    <h:outputText value="#{bundle.ViewWorkLabel_website}"/>
+                    <h:outputText value="#{workController.selected.website}" title="#{bundle.ViewWorkTitle_website}"/>
+                    <h:outputText value="#{bundle.ViewWorkLabel_address}"/>
+                    <h:outputText value="#{workController.selected.address}" title="#{bundle.ViewWorkTitle_address}"/>
+                    <h:outputText value="#{bundle.ViewWorkLabel_companyphone}"/>
+                    <h:outputText value="#{workController.selected.companyphone}" title="#{bundle.ViewWorkTitle_companyphone}"/>
+                    <h:outputText value="#{bundle.ViewWorkLabel_location}"/>
+                    <h:outputText value="#{workController.selected.location}" title="#{bundle.ViewWorkTitle_location}"/>
+                    <h:outputText value="#{bundle.ViewWorkLabel_position}"/>
+                    <h:outputText value="#{workController.selected.position}" title="#{bundle.ViewWorkTitle_position}"/>
+                    <h:outputText value="#{bundle.ViewWorkLabel_jobdescription}"/>
+                    <h:outputText value="#{workController.selected.jobdescription}" title="#{bundle.ViewWorkTitle_jobdescription}"/>
+                    <h:outputText value="#{bundle.ViewWorkLabel_refereename}"/>
+                    <h:outputText value="#{workController.selected.refereename}" title="#{bundle.ViewWorkTitle_refereename}"/>
+                    <h:outputText value="#{bundle.ViewWorkLabel_refereeemail}"/>
+                    <h:outputText value="#{workController.selected.refereeemail}" title="#{bundle.ViewWorkTitle_refereeemail}"/>
+                    <h:outputText value="#{bundle.ViewWorkLabel_refereemobile}"/>
+                    <h:outputText value="#{workController.selected.refereemobile}" title="#{bundle.ViewWorkTitle_refereemobile}"/>
+                    <h:outputText value="#{bundle.ViewWorkLabel_datemodified}"/>
+                    <h:outputText value="#{workController.selected.datemodified}" title="#{bundle.ViewWorkTitle_datemodified}">
+                        <f:convertDateTime dateStyle="full" type="both" timeZone="Africa/Nairobi" />
+                    </h:outputText>
+
+                </p:panelGrid>
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:param name="activeIndex" value="0" />
+        <ui:define name="title">
+
+            <h:outputText value="#{bundle.EditWorkTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" autoUpdate="true" closable="true" />  
+            <h:form>
+                <p:commandButton action="#{workController.update}" value="#{bundle.EditWorkSaveLink}" ajax="false"/>
+                <h:outputText value="&nbsp;&nbsp;"/>
+                <p:commandButton action="View" value="#{bundle.EditWorkViewLink}" immediate="true" ajax="false"/>
+                <h:outputText value="&nbsp;&nbsp;"/>
+                <h:link outcome="/work/List" value="#{bundle.EditWorkShowAllLink}"/>
+
+                <br/>
+                <p:panelGrid columns="2">
+                    <f:facet name="header">  
+                        <h:outputText value="#{bundle.ListWorkTitle}"></h:outputText>
+                    </f:facet> 
+                    <p:outputLabel value="#{bundle.EditWorkLabel_startdate}" for="startdate" />
+                    <p:calendar  id="startdate" value="#{workController.selected.startdate}"  binding="#{startdate}"  mindate="-50y" maxdate="-1d" showOtherMonths="true"  selectOtherMonths="true" yearRange="c-50:c+10" pattern="dd/MM/yyyy" navigator="true" mode="popup"  required="true"  requiredMessage="#{bundle.EditWorkEnterStartDate}"/>
+                    <p:outputLabel value="#{bundle.EditWorkLabel_enddate}" for="enddate" />
+                    <p:calendar  id="enddate" value="#{workController.selected.enddate}" mindate="-50y" maxdate="+10y" showOtherMonths="true"  selectOtherMonths="true" yearRange="c-50:c+10" pattern="dd/MM/yyyy" navigator="true" mode="popup"  required="true"  requiredMessage="#{bundle.CreateWorkEnterEndDate}">
+                        <f:attribute name="startdate" value="#{startdate.value}" />
+                        <f:validator validatorId="validator.EmploymentDateValidator" />
+                    </p:calendar>
+                    <p:outputLabel value="#{bundle.EditWorkLabel_company}" for="company" />
+                    <p:inputText id="company" value="#{workController.selected.company}" title="#{bundle.EditWorkTitle_company}"  required="true" requiredMessage="#{bundle.EditWorkEnterCompany}"/>
+                    <p:outputLabel value="#{bundle.EditWorkLabel_website}" for="website" />
+                    <p:inputText id="website" value="#{workController.selected.website}" title="#{bundle.EditWorkTitle_website}" />
+                    <p:outputLabel value="#{bundle.EditWorkLabel_address}" for="address" />
+                    <p:inputText id="address" value="#{workController.selected.address}" title="#{bundle.EditWorkTitle_address}" />
+                    <p:outputLabel value="#{bundle.EditWorkLabel_companyphone}" for="companyphone" />
+                    <p:inputText id="companyphone" value="#{workController.selected.companyphone}" title="#{bundle.EditWorkTitle_companyphone}" />
+                    <p:outputLabel value="#{bundle.EditWorkLabel_location}" for="location" />
+                    <p:inputText id="location" value="#{workController.selected.location}" title="#{bundle.EditWorkTitle_location}" />
+                    <p:outputLabel value="#{bundle.EditWorkLabel_position}" for="position" />
+                    <p:inputText id="position" value="#{workController.selected.position}" title="#{bundle.EditWorkTitle_position}"  required="true" requiredMessage="#{bundle.EditWorkEnterPosition}"/>
+                    <p:outputLabel value="#{bundle.EditWorkLabel_jobdescription}" for="jobdescription" />
+                    <p:inputText id="jobdescription" value="#{workController.selected.jobdescription}" title="#{bundle.EditWorkTitle_jobdescription}" />
+                    <p:outputLabel value="#{bundle.EditWorkLabel_refereename}" for="refereename" />
+                    <p:inputText id="refereename" value="#{workController.selected.refereename}" title="#{bundle.EditWorkTitle_refereename}" />
+                    <p:outputLabel value="#{bundle.EditWorkLabel_refereeemail}" for="refereeemail" />
+                    <p:inputText id="refereeemail" value="#{workController.selected.refereeemail}" title="#{bundle.EditWorkTitle_refereeemail}" />
+                    <p:outputLabel value="#{bundle.EditWorkLabel_refereemobile}" for="refereemobile" />
+                    <p:inputText id="refereemobile" value="#{workController.selected.refereemobile}" title="#{bundle.EditWorkTitle_refereemobile}" />
+
+                </p:panelGrid>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

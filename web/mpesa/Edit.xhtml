@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMpesaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{mpesaController.selected.id}" title="#{bundle.EditMpesaTitle_id}" required="true" requiredMessage="#{bundle.EditMpesaRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_source}" for="source" />
+                    <h:inputText id="source" value="#{mpesaController.selected.source}" title="#{bundle.EditMpesaTitle_source}" required="true" requiredMessage="#{bundle.EditMpesaRequiredMessage_source}"/>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{mpesaController.selected.name}" title="#{bundle.EditMpesaTitle_name}" required="true" requiredMessage="#{bundle.EditMpesaRequiredMessage_name}"/>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_code}" for="code" />
+                    <h:inputText id="code" value="#{mpesaController.selected.code}" title="#{bundle.EditMpesaTitle_code}" required="true" requiredMessage="#{bundle.EditMpesaRequiredMessage_code}"/>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_amount}" for="amount" />
+                    <h:inputText id="amount" value="#{mpesaController.selected.amount}" title="#{bundle.EditMpesaTitle_amount}" required="true" requiredMessage="#{bundle.EditMpesaRequiredMessage_amount}"/>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_paytime}" for="paytime" />
+                    <h:inputText id="paytime" value="#{mpesaController.selected.paytime}" title="#{bundle.EditMpesaTitle_paytime}" required="true" requiredMessage="#{bundle.EditMpesaRequiredMessage_paytime}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_receivetime}" for="receivetime" />
+                    <h:inputText id="receivetime" value="#{mpesaController.selected.receivetime}" title="#{bundle.EditMpesaTitle_receivetime}" required="true" requiredMessage="#{bundle.EditMpesaRequiredMessage_receivetime}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_processed}" for="processed" />
+                    <h:inputText id="processed" value="#{mpesaController.selected.processed}" title="#{bundle.EditMpesaTitle_processed}" required="true" requiredMessage="#{bundle.EditMpesaRequiredMessage_processed}"/>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_processtime}" for="processtime" />
+                    <h:inputText id="processtime" value="#{mpesaController.selected.processtime}" title="#{bundle.EditMpesaTitle_processtime}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_fromtime}" for="fromtime" />
+                    <h:inputText id="fromtime" value="#{mpesaController.selected.fromtime}" title="#{bundle.EditMpesaTitle_fromtime}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_totime}" for="totime" />
+                    <h:inputText id="totime" value="#{mpesaController.selected.totime}" title="#{bundle.EditMpesaTitle_totime}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_seekerid}" for="seekerid" />
+                    <h:selectOneMenu id="seekerid" value="#{mpesaController.selected.seekerid}" title="#{bundle.EditMpesaTitle_seekerid}" >
+                        <f:selectItems value="#{seekersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_inmessageid}" for="inmessageid" />
+                    <h:selectOneMenu id="inmessageid" value="#{mpesaController.selected.inmessageid}" title="#{bundle.EditMpesaTitle_inmessageid}" required="true" requiredMessage="#{bundle.EditMpesaRequiredMessage_inmessageid}">
+                        <f:selectItems value="#{inmessageController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMpesaLabel_companyid}" for="companyid" />
+                    <h:selectOneMenu id="companyid" value="#{mpesaController.selected.companyid}" title="#{bundle.EditMpesaTitle_companyid}" >
+                        <f:selectItems value="#{companyController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{mpesaController.update}" value="#{bundle.EditMpesaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditMpesaViewLink}"/>
+                <br />
+                <h:commandLink action="#{mpesaController.prepareList}" value="#{bundle.EditMpesaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditMpesaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

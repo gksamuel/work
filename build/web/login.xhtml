@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <ui:composition template="homeTemplate.xhtml" >
+
+        <ui:define name="title">Login</ui:define>
+        <ui:define name="body">
+            <script src="https://apis.google.com/js/platform.js" async="true" defer="true"></script>
+            <script>
+                function loginSeeker(googleUser) {
+                    onSignIn(googleUser, "seeker");
+                }
+
+
+                function onSignIn(googleUser, userType) {
+                    var profile = googleUser.getBasicProfile();
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (xhttp.readyState === 4) {
+                            if (xhttp.status === 200) {
+                                window.location = "/";
+                            }
+                        }
+                    };
+                    var data = "token=" + googleUser.getAuthResponse().id_token;
+                    xhttp.open("POST", "/GoogleProcessor", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.setRequestHeader("Content-length", data.length);
+                    xhttp.setRequestHeader("Connection", "close");
+                    xhttp.send(data);
+                }
+
+            </script>
+            <table border="0px" cellpadding="0px" cellspacing="0px">
+                <tr>
+                    <td style="border: 0px;" valign="top">
+                        Sign In With Google&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <meta name="google-signin-client_id" content="832927615145-9mkei4omon7ir5v0qc93njq93ohi1br4.apps.googleusercontent.com"></meta>
+                        <div class="g-signin2" data-onsuccess="loginSeeker"></div>
+                    </td>
+                    <td style="border: 0px;" valign="top">
+                        <form action="j_security_check" method="POST">
+                            Username:<input type="text" name="j_username"  size="7"/>&nbsp;
+                            Password:<input type="password" name="j_password"   size="7"/>&nbsp;
+                            <input type="submit" value="Login" />
+                        </form>
+                        <h:form>
+                            <h:commandLink action="/registration/Create" value="#{bundle.RegisterUser}"/>  &nbsp;|&nbsp;
+                            <h:commandLink action="/public/Forgot" value="#{bundle.ForgotPassword}"/>
+                        </h:form>
+                    </td>
+                </tr>
+            </table>
+        </ui:define>
+    </ui:composition>
+</html>
